@@ -23,29 +23,6 @@ A CAM is a special type of memory used in:
 - Full and empty status flags
 - Comprehensive testbench
 
-## Architecture
-
-```
-            ┌──────────────────────────┐
-  Write ───►│      Memory Array        │
-  (we,       │  ┌─────┬─────┬───┬─────┐│
-   waddr,    │  │ [0] │ [1] │...│[N-1]││
-   din)      │  │data │data │   │data ││
-            │  │valid│valid│   │valid││
-            │  └──┬──┴──┬──┴───┴──┬──┘│
-            │     │     │         │    │
-  Search ──►│  compare compare  compare│
-  Key        │     │     │         │    │
-            │     ▼     ▼         ▼    │
-            │   ┌────────────────────┐ │
-            │   │  Priority Encoder  │ │
-            │   │ (lowest index wins)│ │
-            │   └────────┬───────────┘ │
-            └────────────┼─────────────┘
-                         ▼
-               match, match_index
-```
-
 ## Port Map
 
 | Port | Direction | Width | Description |
@@ -102,18 +79,6 @@ The testbench covers:
 | Delete | Entry removed, next copy found |
 | Overwrite | Old value replaced, new value searchable |
 | Full flag | Asserted when all slots used |
-
-## Project Structure
-
-```
-cam_engine/
-├── rtl/
-│   └── cam.v           # CAM module
-├── tb/
-│   └── cam_tb.v        # Testbench
-├── LICENSE
-└── README.md
-```
 
 ## License
 
